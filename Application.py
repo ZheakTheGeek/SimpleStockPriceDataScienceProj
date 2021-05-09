@@ -45,7 +45,7 @@ def get_dividends(stock):
     return outlist
               #  stock.Dividends.pop(x)
 
-tickerSymbols = ['BTC-USD','ETH-USD', 'DOGE-USD', 'GOOGL', 'MMM', 'ABT', 'ABBV', 'NSRGY','MSFT']
+tickerSymbols = ['BTC-USD','ETH-USD', 'DOGE-USD', 'GOOGL', 'MMM', 'ABT', 'ABBV', 'NSRGY','MSFT', 'JNJ','HSY']
 tickerData = get_data(tickerSymbols)
 tickerDf = get_df(tickerData)
 
