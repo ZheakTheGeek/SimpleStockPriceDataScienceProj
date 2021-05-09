@@ -5,7 +5,7 @@ import yfinance as yf
 sl.write("""
 # Simple Stock Price App
 
-These are stock closing price and volume of S&P 500 Stocks and Google
+Rebuilding of Stock predictive bot, example stocks
 
 """)
 #Define ticker symbol and get data on the ticker
@@ -14,17 +14,18 @@ These are stock closing price and volume of S&P 500 Stocks and Google
 def write_charts(inlist,tickers):
     incrementer = 0
     for i in inlist:
-        print(type(i))
-        sl.write("""# Closing Price """ + tickers[incrementer])
+        sl.write("""# """ + tickers[incrementer])
+        sl.write("""### Closing Price """)
         sl.line_chart(i.Close)       
-        sl.write("""# Volume """ + tickers[incrementer])
+        sl.write("""### Volume """)
         sl.line_chart(i.Volume)
         if sum(i.Dividends) != 0:
             dividends = get_dividends(i.Dividends)
-            sl.write("""# Dividends """ + tickers[incrementer])
+            sl.write("""### Dividends """)
             sl.line_chart(dividends)
+           #  sl.write(""" ### The average increase is """ + str(round((sum(dividends)/len(dividends))*100,2))+'%')
+            sl.write(""" ### Non Zero payouts have been listed in the below chart (cents per stock owned)""")
             sl.write(dividends)
-            sl.write(type(dividends))
         incrementer +=1       
 # Gets Data for list of tickers sent into the method
 def get_data(inlist):
@@ -44,7 +45,7 @@ def get_dividends(stock):
     return outlist
               #  stock.Dividends.pop(x)
 
-tickerSymbols = ['BTC-USD','ETH-USD', 'DOGE-USD', 'GOOGL', 'MMM', 'ABT', 'ABBV']
+tickerSymbols = ['BTC-USD','ETH-USD', 'DOGE-USD', 'GOOGL', 'MMM', 'ABT', 'ABBV', 'NSRGY','MSFT']
 tickerData = get_data(tickerSymbols)
 tickerDf = get_df(tickerData)
 
