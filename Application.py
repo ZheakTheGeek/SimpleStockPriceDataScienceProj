@@ -21,12 +21,15 @@ def write_charts(inlist,tickers):
         sl.line_chart(i.Volume)
         if sum(i.Dividends) != 0:
             dividends = get_dividends(i.Dividends)
+            ri = get_relative_increase(dividends)
             sl.write("""### Dividends """)
             sl.line_chart(dividends)
            #  sl.write(""" ### The average increase is """ + str(round((sum(dividends)/len(dividends))*100,2))+'%')
             sl.write(""" ### Non Zero payouts have been listed in the below chart (cents per stock owned)""")
             sl.write(dividends)
+            sl.write(""" ### Relative Increase of : """ + str(ri))
         incrementer +=1       
+        
 # Gets Data for list of tickers sent into the method
 def get_data(inlist):
     outlist =[]
@@ -43,7 +46,12 @@ def get_df(data):
 def get_dividends(stock):
     outlist = stock[stock != 0]
     return outlist
-              #  stock.Dividends.pop(x)
+              
+def get_relative_increase(inlist):
+    outlist = []
+    for i in range(0,len(inlist)-1):
+            outlist.append((inlist[i+1]-i)/i)
+    return outlist
 
 tickerSymbols = ['BTC-USD','ETH-USD', 'DOGE-USD', 'GOOGL', 'MMM', 'ABT', 'ABBV', 'NSRGY','MSFT', 'JNJ','HSY']
 tickerData = get_data(tickerSymbols)
