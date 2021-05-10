@@ -47,10 +47,11 @@ def get_dividends(stock):
     outlist = stock[stock != 0]
     return outlist
               
+    # TODO - Remove infinity values that occour as a result of division by 0, or of N and O being equal. 
 def get_relative_increase(inlist):
     outlist = []
     for i in range(0,len(inlist)-1):
-            outlist.append((inlist[i+1]-i)/i)
+        outlist.append((inlist[i+1]-i)/i)
     return outlist
 
 tickerSymbols = ['BTC-USD','ETH-USD', 'DOGE-USD', 'GOOGL', 'MMM', 'ABT', 'ABBV', 'NSRGY','MSFT', 'JNJ','HSY']
